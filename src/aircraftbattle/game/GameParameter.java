@@ -12,6 +12,9 @@ public class GameParameter {
     public static int toTalScore;// 本次游戏总分
     public static int currentLevel;// 当前关卡
     public static boolean suspendFlag;//游戏线程暂停标志
+    public static int currentSkillLevel;//当前技能等级
+    public static boolean skill1Flag = false;
+    public static boolean skill2Flag = false;
 
 
     // 游戏固定参数—————————————————————————————————————————————————————————————————————————————————
@@ -25,12 +28,13 @@ public class GameParameter {
     public static final int PLAYER_SPAWN_Y = 820;// 玩家发生点纵坐标
     public static final int START_SCORE = 0;// 起始分数
     public static final int START_LEVEL = 0;// 起始关卡
+    public static final int START_SKILL_LEVEL = 0;//起始技能等级
     public static final int START_HEALTH = 100;// 起始生命值
     public static final int[] START_BULLETS = {100, 200, 300, 400, 500};// 起始子弹
     public static final int[] START_MAGIC_BULLETS = {10, 20, 30, 40, 50};//起始魔法子弹
     // 敌人参数
     public static final int[] ENEMY_BULLETS = {2, 5, 10, 15, 10000};// 敌人子弹
-    public static final int ENEMY_HEALTH = 3;// 敌人生命值
+    public static final int ENEMY_HEALTH = 10;// 敌人生命值
     public static final int ENEMY_SPEED_X = 0;// 敌人横向速度
     public static final int BOSS_SPEED_X = 1;// BOSS横向速度
     public static final int BOSS_SPEED_Y = 1;// BOSS纵向速度
@@ -43,6 +47,9 @@ public class GameParameter {
     // 魔法子弹参数
     public static final int MAGIC_BULLET_SPEED_X = 0;// 魔法子弹横向速度
     public static final int MAGIC_BULLET_SPEED_Y = 3;// 魔法子弹纵向速度
+
+    // 技能持续时间参数
+    public static final int[] SKILL_AMOUNT = {2, 4, 6, 8, 10};
 
     public enum BulletType {
         PLAYER, ENEMY, MAGIC
@@ -60,6 +67,7 @@ public class GameParameter {
 
     // 碰撞伤害参数
     public static final int BULLET_HURT_POINT = 3;// 子弹和飞机碰撞伤害点数
+    public static final int MAGIC_BULLET_HURT_POINT = 5;// 魔法子弹和飞机碰撞伤害综述
     public static final int AIRCRAFT_HURT_POINT = 5;// 飞机和飞机碰撞伤害点数
     //子弹和子弹碰撞直接双方子弹死亡
 

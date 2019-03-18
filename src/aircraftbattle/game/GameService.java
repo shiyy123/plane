@@ -15,7 +15,7 @@ import aircraftbattle.util.GameUtil;
  */
 public class GameService {
 
-    private Player player;// 玩家
+    public static Player player;// 玩家
     private ArrayList<Bullet> playerBullets;// 玩家子弹
 
     private ArrayList<MagicBullet> playerMagicBullets;//魔法子弹
@@ -72,30 +72,33 @@ public class GameService {
         }
         // 画敌人
         if (!enemies.isEmpty()) {
-            for (int i = 0; i < enemies.size(); i++) {
-                if (enemies.get(i).isAlive())
-                    enemies.get(i).draw(g);
+            for (Enemy enemy : enemies) {
+                if (enemy.isAlive())
+                    enemy.draw(g);
             }
         }
         // 画敌人子弹
         if (!enemiesBullets.isEmpty()) {
-            for (int i = 0; i < enemiesBullets.size(); i++) {
-                if (enemiesBullets.get(i).isAlive())
-                    enemiesBullets.get(i).draw(g);
+            for (Bullet enemiesBullet : enemiesBullets) {
+                if (enemiesBullet.isAlive()) {
+                    enemiesBullet.draw(g);
+                }
             }
         }
         // 画魔法物品
         if (!magics.isEmpty()) {
-            for (int i = 0; i < magics.size(); i++) {
-                if (magics.get(i).isAlive())
-                    magics.get(i).draw(g);
+            for (Magic magic : magics) {
+                if (magic.isAlive()) {
+                    magic.draw(g);
+                }
             }
         }
         // 画爆炸效果
         if (!explosions.isEmpty()) {
-            for (int i = 0; i < explosions.size(); i++) {
-                if (explosions.get(i).isAlive())
-                    explosions.get(i).draw(g);
+            for (Explosion explosion : explosions) {
+                if (explosion.isAlive()) {
+                    explosion.draw(g);
+                }
             }
         }
     }
@@ -120,38 +123,42 @@ public class GameService {
     public void generateEnemy() throws IOException {
         // 最后一关只有一个BOSS
         if (GameParameter.currentLevel == 4) {
-            if (enemies.isEmpty())
+            if (enemies.isEmpty()) {
                 enemies.add(new Boss("img\\Boss.png"));
-            return;
+                return;
+            }
         }
         // 其他关卡
-        if (enemies.isEmpty() || enemies.get(enemies.size() - 1).getY() > 200)// 上一个敌人移动超过200
+        if (enemies.isEmpty() || enemies.get(enemies.size() - 1).getY() > 200) {// 上一个敌人移动超过200
             enemies.add(new Enemy(GameUtil.getLevelEnemyPath(GameParameter.currentLevel), GameParameter.currentLevel));
+        }
     }
 
     public void othersMove() {
         //敌人移动
         if (!enemies.isEmpty()) {
-            for (int i = 0; i < enemies.size(); i++) {
-                if (enemies.get(i).isAlive())
-                    enemies.get(i).move();
+            for (Enemy enemy : enemies) {
+                if (enemy.isAlive()) {
+                    enemy.move();
+                }
             }
         }
         //敌人子弹移动
         if (!enemiesBullets.isEmpty()) {
-            for (int i = 0; i < enemiesBullets.size(); i++) {
-                if (enemiesBullets.get(i).isAlive())
-                    enemiesBullets.get(i).move();
+            for (Bullet enemiesBullet : enemiesBullets) {
+                if (enemiesBullet.isAlive()) {
+                    enemiesBullet.move();
+                }
             }
         }
         //魔法物品移动
         if (!magics.isEmpty()) {
-            for (int i = 0; i < magics.size(); i++) {
-                if (magics.get(i).isAlive())
-                    magics.get(i).move();
+            for (Magic magic : magics) {
+                if (magic.isAlive()) {
+                    magic.move();
+                }
             }
         }
-
     }
 
     public void playerBulletsGenerate() throws IOException {
@@ -178,9 +185,10 @@ public class GameService {
 
     public void playerBulletsMove() {
         if (!playerBullets.isEmpty()) {
-            for (int i = 0; i < playerBullets.size(); i++) {
-                if (playerBullets.get(i).isAlive())
-                    playerBullets.get(i).move();
+            for (Bullet playerBullet : playerBullets) {
+                if (playerBullet.isAlive()) {
+                    playerBullet.move();
+                }
             }
         }
     }
@@ -196,23 +204,24 @@ public class GameService {
     }
 
     public void enemyBulletsGenerate() throws IOException {
-        for (int i = 0; i < enemies.size(); i++) {
+        for (Enemy enemy : enemies) {
             boolean flag = false;// 能否发射子弹
 
-            if (enemies.get(i).getBulletsNum() != 0) {// 还有子弹
-                if (GameParameter.currentLevel == 4)// BOSS无限发射子弹
+            if (enemy.getBulletsNum() != 0) {// 还有子弹
+                if (GameParameter.currentLevel == 4) {// BOSS无限发射子弹
                     flag = true;
-                else if (enemies.get(i).getCurrentBullet() == null)// 第一颗子弹
+                } else if (enemy.getCurrentBullet() == null) {// 第一颗子弹
                     flag = true;
-                else { // 不是第一颗子弹
-                    if (enemies.get(i).getCurrentBullet().getY() > GameUtil.getRandomNum(500, 600))// 前一颗子弹Y过了一个随机数
+                } else { // 不是第一颗子弹
+                    if (enemy.getCurrentBullet().getY() > GameUtil.getRandomNum(500, 600)) {// 前一颗子弹Y过了一个随机数
                         flag = true;
+                    }
                 }
             }
             // 可以发射子弹
             if (flag) {
-                Bullet enemyBullet = enemies.get(i).directionalAttack(player.getX(), player.getY());
-                enemies.get(i).setCurrentBullet(enemyBullet);
+                Bullet enemyBullet = enemy.directionalAttack(player.getX(), player.getY());
+                enemy.setCurrentBullet(enemyBullet);
                 enemiesBullets.add(enemyBullet);
             }
         }
@@ -222,35 +231,45 @@ public class GameService {
     public void collisionDetect() throws IOException {
         // 敌人碰撞
         if (!enemies.isEmpty()) {
-            for (int i = 0; i < enemies.size(); i++) {
-                if (enemies.get(i).isAlive()) {
+            for (Enemy enemy : enemies) {
+                if (enemy.isAlive()) {
                     // 敌人与玩家碰撞
-                    if (GameUtil.isCrossing(enemies.get(i).getRectangle(), player.getRectangle())) {
+                    if (GameUtil.isCrossing(enemy.getRectangle(), player.getRectangle())) {
                         player.hurt(GameParameter.AIRCRAFT_HURT_POINT);// 玩家受到伤害
-                        enemies.get(i).hurt(GameParameter.AIRCRAFT_HURT_POINT);// 敌人受到伤害
+                        enemy.hurt(GameParameter.AIRCRAFT_HURT_POINT);// 敌人受到伤害
                     }
                     // 敌人与玩家子弹碰撞
                     if (!playerBullets.isEmpty()) {
-                        for (int j = 0; j < playerBullets.size(); j++) {
-                            if (GameUtil.isCrossing(playerBullets.get(j).getRectangle(),
-                                    enemies.get(i).getRectangle())) {
-                                playerBullets.get(j).setAlive(false);// 玩家子弹死亡
-                                enemies.get(i).hurt(GameParameter.BULLET_HURT_POINT);// 敌人受到伤害
+                        for (Bullet playerBullet : playerBullets) {
+                            if (GameUtil.isCrossing(playerBullet.getRectangle(),
+                                    enemy.getRectangle())) {
+                                playerBullet.setAlive(false);// 玩家子弹死亡
+                                enemy.hurt(GameParameter.BULLET_HURT_POINT);// 敌人受到伤害
+                            }
+                        }
+                    }
+                    //敌人与玩家魔法子弹碰撞
+                    if (!playerMagicBullets.isEmpty()) {
+                        for (MagicBullet playerMagicBullet : playerMagicBullets) {
+                            if (GameUtil.isCrossing(playerMagicBullet.getRectangle(),
+                                    enemy.getRectangle())) {
+                                playerMagicBullet.setAlive(false);// 玩家魔法子弹死亡
+                                enemy.hurt(GameParameter.MAGIC_BULLET_HURT_POINT);
                             }
                         }
                     }
                     // 判断敌人是否死亡
-                    if (enemies.get(i).getHealth() <= 0) {
-                        enemies.get(i).setAlive(false);// 敌人死亡
+                    if (enemy.getHealth() <= 0) {
+                        enemy.setAlive(false);// 敌人死亡
                         GameParameter.toTalScore += GameParameter.ENEMY_HURT_SCORE;// 加分
                         // 是否掉落魔法物品
                         if (GameUtil.isMagicFall()) {
-                            Magic magic = new Magic(enemies.get(i).getX(), enemies.get(i).getX(),
+                            Magic magic = new Magic(enemy.getX(), enemy.getX(),
                                     GameUtil.getRandomMagicType());
                             magics.add(magic);
                         }
                         // 播放爆炸效果
-                        Explosion explosion = new Explosion(enemies.get(i).getX(), enemies.get(i).getY());
+                        Explosion explosion = new Explosion(enemy.getX(), enemy.getY());
                         explosions.add(explosion);
                     }
                 }
@@ -258,21 +277,32 @@ public class GameService {
         }
         // 敌人子弹碰撞
         if (!enemiesBullets.isEmpty()) {
-            for (int i = 0; i < enemiesBullets.size(); i++) {
-                if (enemiesBullets.get(i).isAlive()) {
+            for (Bullet enemiesBullet : enemiesBullets) {
+                if (enemiesBullet.isAlive()) {
                     // 敌人子弹与玩家碰撞
-                    if (GameUtil.isCrossing(enemiesBullets.get(i).getRectangle(), player.getRectangle())) {
+                    if (GameUtil.isCrossing(enemiesBullet.getRectangle(), player.getRectangle())) {
                         player.hurt(GameParameter.BULLET_HURT_POINT);// 玩家受到伤害
-                        enemiesBullets.get(i).setAlive(false);// 敌人子弹死亡
+                        enemiesBullet.setAlive(false);// 敌人子弹死亡
                     }
                     // 敌人子弹与玩家子弹碰撞
-                    if (!playerBullets.isEmpty() && enemiesBullets.get(i).isAlive()) {
-                        for (int j = 0; j < playerBullets.size(); j++) {
-                            if (GameUtil.isCrossing(playerBullets.get(j).getRectangle(),
-                                    enemiesBullets.get(i).getRectangle())) {
+                    if (!playerBullets.isEmpty() && enemiesBullet.isAlive()) {
+                        for (Bullet playerBullet : playerBullets) {
+                            if (GameUtil.isCrossing(playerBullet.getRectangle(),
+                                    enemiesBullet.getRectangle())) {
                                 GameParameter.toTalScore += GameParameter.BULLET_HURT_SCORE;//加分
-                                playerBullets.get(j).setAlive(false);// 玩家子弹死亡
-                                enemiesBullets.get(i).setAlive(false);// 敌人子弹死亡
+                                playerBullet.setAlive(false);// 玩家子弹死亡
+                                enemiesBullet.setAlive(false);// 敌人子弹死亡
+                            }
+                        }
+                    }
+                    // 敌人子弹与玩家魔法子弹碰撞
+                    if (!playerMagicBullets.isEmpty() && enemiesBullet.isAlive()) {
+                        for (MagicBullet playerMagicBullet : playerMagicBullets) {
+                            if (GameUtil.isCrossing(playerMagicBullet.getRectangle(),
+                                    enemiesBullet.getRectangle())) {
+                                GameParameter.toTalScore += GameParameter.BULLET_HURT_SCORE;// 加分
+                                playerMagicBullet.setAlive(false);// 玩家子弹死亡
+                                enemiesBullet.setAlive(false);// 敌人子弹死亡
                             }
                         }
                     }
@@ -281,14 +311,15 @@ public class GameService {
         }
         // 魔法物品碰撞
         if (!magics.isEmpty()) {
-            for (int i = 0; i < magics.size(); i++) {
-                if (magics.get(i).isAlive()) {
-                    if (GameUtil.isCrossing(magics.get(i).getRectangle(), player.getRectangle())) {
-                        if (magics.get(i).getType() == MagicType.HEALTH)
+            for (Magic magic : magics) {
+                if (magic.isAlive()) {
+                    if (GameUtil.isCrossing(magic.getRectangle(), player.getRectangle())) {
+                        if (magic.getType() == MagicType.HEALTH) {
                             player.hurt(-GameParameter.MAGIC_HEALTH_POINT);//加生命值
-                        else
+                        } else {
                             player.bulletAdd(GameParameter.MAGIC_BULLET_POINT);//加子弹数目
-                        magics.get(i).setAlive(false);
+                        }
+                        magic.setAlive(false);
                     }
                 }
             }
@@ -302,35 +333,47 @@ public class GameService {
         // 死亡玩家子弹移除
         if (!playerBullets.isEmpty()) {
             for (int i = 0; i < playerBullets.size(); i++) {
-                if (!playerBullets.get(i).isAlive())
+                if (!playerBullets.get(i).isAlive()) {
                     playerBullets.remove(i);
+                }
+            }
+        }
+        // 死亡玩家魔法子弹移除
+        if (!playerMagicBullets.isEmpty()) {
+            for (int i = 0; i < playerMagicBullets.size(); i++) {
+                if (!playerMagicBullets.get(i).isAlive()) {
+                    playerMagicBullets.remove(i);
+                }
             }
         }
         // 死亡敌人移除
         if (!enemies.isEmpty()) {
             for (int i = 0; i < enemies.size(); i++) {
-                if (!enemies.get(i).isAlive())
+                if (!enemies.get(i).isAlive()) {
                     enemies.remove(i);
+                }
             }
         }
         // 死亡敌人子弹移除
         if (!enemiesBullets.isEmpty()) {
             for (int i = 0; i < enemiesBullets.size(); i++) {
-                if (!enemiesBullets.get(i).isAlive())
+                if (!enemiesBullets.get(i).isAlive()) {
                     enemiesBullets.remove(i);
+                }
             }
         }
         // 死亡魔法物品移除
         if (!magics.isEmpty()) {
             for (int i = 0; i < magics.size(); i++) {
-                if (!magics.get(i).isAlive())
+                if (!magics.get(i).isAlive()) {
                     magics.remove(i);
+                }
             }
         }
     }
 
     public boolean gameEndDetect() {
-        if (player.isAlive() == false || player.getHealth() <= 0) {
+        if (!player.isAlive() || player.getHealth() <= 0) {
             GameParameter.suspendFlag = false;
             return true;
         }
@@ -338,8 +381,6 @@ public class GameService {
     }
 
     public boolean nextLevelDetect() {
-        if (GameParameter.toTalScore >= GameParameter.TARGET_SCORE[GameParameter.currentLevel])
-            return true;
-        return false;
+        return GameParameter.toTalScore >= GameParameter.TARGET_SCORE[GameParameter.currentLevel];
     }
 }

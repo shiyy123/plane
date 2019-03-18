@@ -2,6 +2,7 @@ package aircraftbattle.game;
 
 import aircraftbattle.stuff.Detection;
 import aircraftbattle.stuff.EnemyThread;
+import aircraftbattle.stuff.Player;
 import aircraftbattle.stuff.PlayerThread;
 import aircraftbattle.util.GameUtil;
 
@@ -52,7 +53,7 @@ public class GameFrame extends JFrame {
         StartPanelBuild(this);
         HelpPanelBuild(this);
         ChoosePanelBuild(this);
-        GamingPanelBuild(this, 0);
+        GamingPanelBuild(this, 0, 0);
         GoPanelBuild(this);
         EndPanelBuild(this);
 
@@ -189,7 +190,7 @@ public class GameFrame extends JFrame {
 
     }
 
-    private void GamingPanelBuild(GameFrame gameFrame, int level) {
+    private void GamingPanelBuild(GameFrame gameFrame, int level, int skillLevel) {
         gamingPanel = new GamingPanel();
 
         // TestButton————————————————————————————————————————————————————————————
@@ -216,7 +217,7 @@ public class GameFrame extends JFrame {
             if (GameParameter.currentLevel == 4)
                 System.exit(0);
             service.clear();// 清屏
-            GamingPanelBuild(gameFrame, ++GameParameter.currentLevel);// 进入下一关
+            GamingPanelBuild(gameFrame, ++GameParameter.currentLevel, ++GameParameter.currentSkillLevel);// 进入下一关
             CardChange("gaming");
         });
 
@@ -239,7 +240,7 @@ public class GameFrame extends JFrame {
             GameParameter.suspendFlag = false;// 线程循环不可行
             GameParameter.toTalScore = GameParameter.START_SCORE;// 重新计分
             GameParameter.currentLevel = GameParameter.START_LEVEL;// 新关卡
-            GamingPanelBuild(gameFrame, GameParameter.START_LEVEL);// 创建初始关卡
+            GamingPanelBuild(gameFrame, GameParameter.START_LEVEL, GameParameter.START_SKILL_LEVEL);// 创建初始关卡
             service.clear();// 清屏
 
             CardChange("choose");
@@ -306,6 +307,18 @@ public class GameFrame extends JFrame {
             healthLabel.setText(String.valueOf(GameParameter.START_HEALTH));
             magicBulletLabel.setText(String.valueOf(GameParameter.START_MAGIC_BULLETS[GameParameter.currentLevel]));
 
+//            Container container = getContentPane();
+//
+//            JButton skillButton1 = GameUtil.getIconSizeJButton("img\\skill1.png", 50, 560);
+//            JButton skillButton2 = GameUtil.getIconSizeJButton("img\\skill2.png", 50, 660);
+//
+//            skillButton1.addActionListener(e -> {
+//                GameService.player.hurt(-GameParameter.SKILL_AMOUNT[GameParameter.currentSkillLevel]);
+//            });
+//
+//            container.add(skillButton1);
+//            container.add(skillButton2);
+
             add(label1);
             add(label2);
             add(label3);
@@ -317,7 +330,6 @@ public class GameFrame extends JFrame {
             add(bulletLabel);
             add(healthLabel);
             add(magicBulletLabel);
-
         }
 
         @Override
