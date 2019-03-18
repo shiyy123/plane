@@ -1,6 +1,9 @@
 package aircraftbattle.game;
 
-
+/**
+ * @author cary
+ * @date 2019/3/18 16:43
+ */
 public class GameParameter {
 
     // 游戏进行时参数————————————————————————————————————————————————————————————————————————————
@@ -16,8 +19,8 @@ public class GameParameter {
     public static final int[] TARGET_SCORE = {100, 200, 300, 400, 500};// 目标分数
 
     // 玩家参数
-    public static final int PLAYER_SPPEED_X = 4;// 玩家横向速度
-    public static final int PLAYER_SPPEED_Y = 5;// 玩家纵向速度
+    public static final int PLAYER_SPEED_X = 4;// 玩家横向速度
+    public static final int PLAYER_SPEED_Y = 5;// 玩家纵向速度
     public static final int PLAYER_SPAWN_X = 360;// 玩家发生点横坐标
     public static final int PLAYER_SPAWN_Y = 820;// 玩家发生点纵坐标
     public static final int START_SCORE = 0;// 起始分数
@@ -61,9 +64,9 @@ public class GameParameter {
 
     // 界面参数————————————————————————————————————————————————————————————————————————————————
     public static final int FRAME_WIDTH = 800;// 界面宽度
-    public static final int FRAME_HIGHT = 1000;// 界面高度
+    public static final int FRAME_HEIGHT = 1000;// 界面高度
 
-    public static final int AIRCRAFTE_IMAGE_LENGTH = 80;// 飞机图片边长 80
+    public static final int AIRCRAFT_IMAGE_LENGTH = 80;// 飞机图片边长 80
     public static final int BULLET_IMAGE_WIDTH = 25;// 子弹图片宽
     public static final int BULLET_IMAGE_HEIGHT = 15;// 子弹图片高
     public static final int MAGIC_IMAGE_HEIGHT = 30;// 魔法物品图片边长

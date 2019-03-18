@@ -7,7 +7,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-
+/**
+ * @author cary
+ * @date 2019/3/18 16:43
+ */
 public abstract class GameComponent {
 
 	protected int x;// ºá×ø±ê

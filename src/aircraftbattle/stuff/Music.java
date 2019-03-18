@@ -2,9 +2,12 @@ package aircraftbattle.stuff;
 
 import java.io.InputStream;
 
-
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
+/**
+ * @author cary
+ * @date 2019/3/18 16:43
+ */
 public class Music extends Thread {
 
     private String mp3Url;

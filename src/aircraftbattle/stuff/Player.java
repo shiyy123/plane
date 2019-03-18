@@ -7,6 +7,10 @@ import aircraftbattle.game.GameParameter;
 import aircraftbattle.game.GameParameter.BulletType;
 import aircraftbattle.util.GameUtil;
 
+/**
+ * @author cary
+ * @date 2019/3/18 16:43
+ */
 public class Player extends GameComponent {
 
 	private int score;
@@ -47,8 +51,8 @@ public class Player extends GameComponent {
 	}
 
 	public Player(String path, int level) throws IOException {
-		super(GameParameter.PLAYER_SPAWN_X, GameParameter.PLAYER_SPAWN_Y, GameParameter.PLAYER_SPPEED_X,
-				GameParameter.PLAYER_SPPEED_Y, path);
+		super(GameParameter.PLAYER_SPAWN_X, GameParameter.PLAYER_SPAWN_Y, GameParameter.PLAYER_SPEED_X,
+				GameParameter.PLAYER_SPEED_Y, path);
 		this.setAlive(true);
 		this.bulletsNum = GameParameter.START_BULLETS[level];
 		this.health = GameParameter.START_HEALTH;
@@ -63,7 +67,7 @@ public class Player extends GameComponent {
 	@Override
 	public void move() {
 		if (GameParameter.isW) {
-			if (y > GameParameter.AIRCRAFTE_IMAGE_LENGTH / 2)
+			if (y > GameParameter.AIRCRAFT_IMAGE_LENGTH / 2)
 				y -= speedY;
 		}
 		if (GameParameter.isA) {
@@ -71,11 +75,11 @@ public class Player extends GameComponent {
 				x -= speedX;
 		}
 		if (GameParameter.isS) {
-			if (y < GameParameter.FRAME_HIGHT - GameParameter.AIRCRAFTE_IMAGE_LENGTH)
+			if (y < GameParameter.FRAME_HEIGHT - GameParameter.AIRCRAFT_IMAGE_LENGTH)
 				y += speedY;
 		}
 		if (GameParameter.isD) {
-			if (x <= GameParameter.FRAME_WIDTH - GameParameter.AIRCRAFTE_IMAGE_LENGTH)
+			if (x <= GameParameter.FRAME_WIDTH - GameParameter.AIRCRAFT_IMAGE_LENGTH)
 				x += speedX;
 		}
 	}
@@ -86,7 +90,7 @@ public class Player extends GameComponent {
 
 		String path = GameUtil.getTypedBulletPath(BulletType.PLAYER);
 		Bullet bullet = new Bullet(
-				x + GameParameter.AIRCRAFTE_IMAGE_LENGTH / 2 - GameParameter.BULLET_IMAGE_WIDTH / 2 + 4, // 4是个修正值
+				x + GameParameter.AIRCRAFT_IMAGE_LENGTH / 2 - GameParameter.BULLET_IMAGE_WIDTH / 2 + 4, // 4是个修正值
 				y - GameParameter.BULLET_IMAGE_HEIGHT, path, BulletType.PLAYER);
 
 		return bullet;

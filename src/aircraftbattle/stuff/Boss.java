@@ -6,7 +6,10 @@ import aircraftbattle.game.GameParameter;
 import aircraftbattle.game.GameParameter.BulletType;
 import aircraftbattle.util.GameUtil;
 
-
+/**
+ * @author cary
+ * @date 2019/3/18 16:43
+ */
 public class Boss extends Enemy {
 
 	public Boss(String path) throws IOException {
@@ -19,7 +22,7 @@ public class Boss extends Enemy {
 	
 	public void move() {
 		if(x > GameParameter.FRAME_WIDTH || x < 0) speedX= (-speedX);//·´µ¯
-		if(y > GameParameter.FRAME_HIGHT/2 || y < 0) speedY= (-speedY);//·´µ¯
+		if(y > GameParameter.FRAME_HEIGHT /2 || y < 0) speedY= (-speedY);//·´µ¯
 		y += speedY;
 		x += speedX;
 	}

@@ -3,7 +3,8 @@ package aircraftbattle.game;
 import javax.swing.*;
 
 /**
- * Entry of the program
+ * @author cary
+ * @date 2019/3/18 16:43
  */
 public class GameMain {
     public static void main(String[] args) {

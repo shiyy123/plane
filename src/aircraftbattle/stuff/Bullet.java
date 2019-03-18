@@ -5,6 +5,10 @@ import java.io.IOException;
 import aircraftbattle.game.GameParameter;
 import aircraftbattle.game.GameParameter.BulletType;
 
+/**
+ * @author cary
+ * @date 2019/3/18 16:43
+ */
 public class Bullet extends GameComponent {
 
     private boolean isAlive;
@@ -59,15 +63,17 @@ public class Bullet extends GameComponent {
 
     @Override
     public void move() {
-        if (y < 0 || y > GameParameter.FRAME_HIGHT) {
+        if (y < 0 || y > GameParameter.FRAME_HEIGHT) {
             isAlive = false;
             return;
         }
 
-        if (type == BulletType.PLAYER)
+        if (type == BulletType.PLAYER) {
             y -= speedY;
-        else
+            x -= speedX;
+        } else {
             directionalFly();
+        }
     }
 
     public void directionalFly() {

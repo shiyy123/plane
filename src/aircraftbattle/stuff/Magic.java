@@ -6,6 +6,10 @@ import aircraftbattle.game.GameParameter;
 import aircraftbattle.game.GameParameter.MagicType;
 import aircraftbattle.util.GameUtil;
 
+/**
+ * @author cary
+ * @date 2019/3/18 16:43
+ */
 public class Magic extends GameComponent {
 
 	private boolean isAlive;
@@ -33,7 +37,7 @@ public class Magic extends GameComponent {
 
 	@Override
 	public void move() {
-		if(y>=GameParameter.FRAME_HIGHT){
+		if(y>=GameParameter.FRAME_HEIGHT){
 			isAlive =false;
 			return;
 		}

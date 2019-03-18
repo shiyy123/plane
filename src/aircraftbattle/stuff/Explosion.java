@@ -9,6 +9,10 @@ import javax.imageio.ImageIO;
 
 import aircraftbattle.game.GameParameter;
 
+/**
+ * @author cary
+ * @date 2019/3/18 16:43
+ */
 public class Explosion {
 
 	private int x;
@@ -38,8 +42,8 @@ public class Explosion {
 	public void draw(Graphics g) throws IOException {
 		Image img = ImageIO.read(new File("img\\" + images[index]));
 	
-		g.drawImage(img, x + GameParameter.AIRCRAFTE_IMAGE_LENGTH / 2, y + GameParameter.AIRCRAFTE_IMAGE_LENGTH / 2,
-			GameParameter.AIRCRAFTE_IMAGE_LENGTH, GameParameter.AIRCRAFTE_IMAGE_LENGTH, null);
+		g.drawImage(img, x + GameParameter.AIRCRAFT_IMAGE_LENGTH / 2, y + GameParameter.AIRCRAFT_IMAGE_LENGTH / 2,
+			GameParameter.AIRCRAFT_IMAGE_LENGTH, GameParameter.AIRCRAFT_IMAGE_LENGTH, null);
 			
 		index++;
 		

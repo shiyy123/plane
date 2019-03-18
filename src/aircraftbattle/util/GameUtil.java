@@ -11,6 +11,10 @@ import aircraftbattle.game.GameParameter;
 import aircraftbattle.game.GameParameter.BulletType;
 import aircraftbattle.game.GameParameter.MagicType;
 
+/**
+ * @author cary
+ * @date 2019/3/18 16:43
+ */
 public class GameUtil {
 
 	public static JButton getIconSizeJButton(String ImagePath, int X, int Y) {
@@ -43,7 +47,7 @@ public class GameUtil {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(Color.white);
-		panel.setSize(GameParameter.FRAME_WIDTH, GameParameter.FRAME_HIGHT);
+		panel.setSize(GameParameter.FRAME_WIDTH, GameParameter.FRAME_HEIGHT);
 
 		return panel;
 
@@ -86,8 +90,8 @@ public class GameUtil {
 
 	public static int getRandomNum(int range) {
 		int ret = (int) (Math.random() * range);
-		if (ret >= range - GameParameter.AIRCRAFTE_IMAGE_LENGTH)
-			ret -= GameParameter.AIRCRAFTE_IMAGE_LENGTH;// 对超出屏幕范围的飞机做一个修正
+		if (ret >= range - GameParameter.AIRCRAFT_IMAGE_LENGTH)
+			ret -= GameParameter.AIRCRAFT_IMAGE_LENGTH;// 对超出屏幕范围的飞机做一个修正
 		return ret;
 	}
 

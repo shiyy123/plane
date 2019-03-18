@@ -6,6 +6,10 @@ import aircraftbattle.game.GameParameter;
 import aircraftbattle.game.GameParameter.BulletType;
 import aircraftbattle.util.GameUtil;
 
+/**
+ * @author cary
+ * @date 2019/3/18 16:43
+ */
 public class Enemy extends GameComponent {
 
 	private int health;
@@ -58,7 +62,7 @@ public class Enemy extends GameComponent {
 
 	@Override
 	public void move() {
-		if (y < 0 || y > GameParameter.FRAME_HIGHT)
+		if (y < 0 || y > GameParameter.FRAME_HEIGHT)
 			isAlive = false;
 		else {
 			y += speedY;
@@ -71,8 +75,8 @@ public class Enemy extends GameComponent {
 
 		String path = GameUtil.getTypedBulletPath(BulletType.ENEMY);
 		Bullet bullet = new Bullet(
-				x + GameParameter.AIRCRAFTE_IMAGE_LENGTH / 2 - GameParameter.BULLET_IMAGE_WIDTH / 2 + 4, // 4是个修正值
-				y + GameParameter.AIRCRAFTE_IMAGE_LENGTH, path, BulletType.ENEMY, targetX, targetY);
+				x + GameParameter.AIRCRAFT_IMAGE_LENGTH / 2 - GameParameter.BULLET_IMAGE_WIDTH / 2 + 4, // 4是个修正值
+				y + GameParameter.AIRCRAFT_IMAGE_LENGTH, path, BulletType.ENEMY, targetX, targetY);
 
 		return bullet;
 	}

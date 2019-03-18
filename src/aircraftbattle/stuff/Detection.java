@@ -3,6 +3,10 @@ package aircraftbattle.stuff;
 import aircraftbattle.game.GameFrame;
 import aircraftbattle.game.GameParameter;
 
+/**
+ * @author cary
+ * @date 2019/3/18 16:43
+ */
 public class Detection extends Thread {
 
 	private GameFrame gameFrame;

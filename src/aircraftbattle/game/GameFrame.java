@@ -11,6 +11,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
+/**
+ * @author cary
+ * @date 2019/3/18 16:43
+ */
 public class GameFrame extends JFrame {
 
     private JPanel startPanel, helpPanel, choosePanel, goPanel, endPanel;// 5个基本界面
@@ -35,7 +39,7 @@ public class GameFrame extends JFrame {
     private void initialize() {
         // 游戏界面基本属性设置
         this.setTitle("飞机大战");
-        this.setSize(GameParameter.FRAME_WIDTH, GameParameter.FRAME_HIGHT);
+        this.setSize(GameParameter.FRAME_WIDTH, GameParameter.FRAME_HEIGHT);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         cardLayout = new CardLayout();
@@ -260,7 +264,7 @@ public class GameFrame extends JFrame {
         void initialize() {
             setLayout(null);
             setBackground(Color.white);
-            setSize(GameParameter.FRAME_WIDTH, GameParameter.FRAME_HIGHT);
+            setSize(GameParameter.FRAME_WIDTH, GameParameter.FRAME_HEIGHT);
 
             // 得分
             JLabel label1 = GameUtil.getIconSizeJLabel("img\\gaming1.png", 50, 50);
