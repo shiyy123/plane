@@ -57,8 +57,9 @@ public class Bullet extends GameComponent {
 
         // 计算相对速度
         int t = (targetY - y) / speedY;
-        if (t != 0)
+        if (t != 0) {
             speedX = Math.abs((targetX - x) / t);
+        }
     }
 
     @Override
@@ -71,7 +72,7 @@ public class Bullet extends GameComponent {
         if (type == BulletType.PLAYER) {
             y -= speedY;
             x -= speedX;
-        } else {
+        } else if (type == BulletType.ENEMY) {
             directionalFly();
         }
     }

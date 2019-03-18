@@ -77,6 +77,9 @@ public class GameFrame extends JFrame {
                     case KeyEvent.VK_SPACE:
                         GameParameter.isSpace = true;
                         break;
+                    case KeyEvent.VK_J:
+                        GameParameter.isJ = true;
+                        break;
                 }
             }
 
@@ -97,6 +100,9 @@ public class GameFrame extends JFrame {
                         break;
                     case KeyEvent.VK_SPACE:
                         GameParameter.isSpace = false;
+                        break;
+                    case KeyEvent.VK_J:
+                        GameParameter.isJ = false;
                         break;
                 }
             }

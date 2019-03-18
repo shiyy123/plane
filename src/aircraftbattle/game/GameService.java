@@ -3,15 +3,10 @@ package aircraftbattle.game;
 import java.awt.Graphics;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import aircraftbattle.game.GameParameter.MagicType;
-import aircraftbattle.stuff.Boss;
-import aircraftbattle.stuff.Bullet;
-import aircraftbattle.stuff.Enemy;
-import aircraftbattle.stuff.Explosion;
-import aircraftbattle.stuff.Magic;
-import aircraftbattle.stuff.Music;
-import aircraftbattle.stuff.Player;
+import aircraftbattle.stuff.*;
 import aircraftbattle.util.GameUtil;
 
 /**
@@ -22,6 +17,8 @@ public class GameService {
 
     private Player player;// 玩家
     private ArrayList<Bullet> playerBullets;// 玩家子弹
+
+    private ArrayList<MagicBullet> playerMagicBullets;//魔法子弹
 
     private ArrayList<Enemy> enemies;// 敌人列表
     private ArrayList<Bullet> enemiesBullets;// 敌人子弹列表
@@ -153,6 +150,16 @@ public class GameService {
             playerBullets.add(playerBullet);
             // 子弹发射音效
             new Music("fire.mp3", false).start();
+        }
+    }
+
+    public void playerMagicBulletsGenerate() throws IOException {
+        if(GameParameter.isJ && player.getMagicBulletNum()!=0){
+            GameParameter.isJ=false;
+
+            MagicBullet playerMagicBullet=player.magicAttack();
+            // TODO do
+
         }
     }
 
