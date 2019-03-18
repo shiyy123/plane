@@ -22,8 +22,10 @@ public class PlayerThread extends Thread {
 			try {
 				//玩家行为自己在一个线程
 				gameFrame.getService().playerBulletsGenerate();
+				gameFrame.getService().playerMagicBulletsGenerate();
 				gameFrame.getService().playerMove();
 				gameFrame.getService().playerBulletsMove();
+				gameFrame.getService().playerMagicBulletsMove();
 							
 				// 重绘
 				gameFrame.repaint();

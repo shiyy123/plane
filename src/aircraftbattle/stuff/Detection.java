@@ -23,9 +23,9 @@ public class Detection extends Thread {
 				
 				gameFrame.getService().othersMove();//ÒÆ¶¯
 			
-				if (gameFrame.getService().gameEndDetecte())
+				if (gameFrame.getService().gameEndDetect())
 					gameFrame.CardChange("end");
-				if(gameFrame.getService().nextLevelDetecte())
+				if(gameFrame.getService().nextLevelDetect())
 					gameFrame.CardChange("go");
 					
 				//ÔÝÍ£

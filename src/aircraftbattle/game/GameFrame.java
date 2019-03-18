@@ -253,7 +253,7 @@ public class GameFrame extends JFrame {
     //---------------------------------------------------------------------------
 
     private class GamingPanel extends JPanel {
-        JLabel scoreLabel, targetLabel, bulletLabel, healthLabel;// 计数标签
+        JLabel scoreLabel, targetLabel, bulletLabel, healthLabel, magicBulletLabel;// 计数标签
 
         public GamingPanel() {
             super();
@@ -281,6 +281,9 @@ public class GameFrame extends JFrame {
             // 剩余子弹
             JLabel label3 = GameUtil.getIconSizeJLabel("img\\gaming3.png", 50, 860);
 
+            // 剩余魔法子弹
+            JLabel label5 = GameUtil.getIconSizeJLabel("img\\gaming5.png", 50, 760);
+
             // 剩余血量
             JLabel label4 = GameUtil.getIconSizeJLabel("img\\gaming4.png", 620, 860);
 
@@ -288,6 +291,7 @@ public class GameFrame extends JFrame {
             targetLabel = GameUtil.getNumJLabel(500, 55);
             bulletLabel = GameUtil.getNumJLabel(180, 860);
             healthLabel = GameUtil.getNumJLabel(520, 860);
+            magicBulletLabel = GameUtil.getNumJLabel(180, 760);
 
             targetLabel.setForeground(Color.blue);
             scoreLabel.setForeground(Color.green);
@@ -300,16 +304,19 @@ public class GameFrame extends JFrame {
             // 初始剩余子弹数随着关卡变高变高
             bulletLabel.setText(String.valueOf(GameParameter.START_BULLETS[GameParameter.currentLevel]));
             healthLabel.setText(String.valueOf(GameParameter.START_HEALTH));
+            magicBulletLabel.setText(String.valueOf(GameParameter.START_MAGIC_BULLETS[GameParameter.currentLevel]));
 
             add(label1);
             add(label2);
             add(label3);
             add(label4);
+            add(label5);
 
             add(scoreLabel);
             add(targetLabel);
             add(bulletLabel);
             add(healthLabel);
+            add(magicBulletLabel);
 
         }
 
@@ -328,6 +335,7 @@ public class GameFrame extends JFrame {
 
         void paintLabels() {
             bulletLabel.setText(String.valueOf(service.getPlayer().getBulletsNum()));
+            magicBulletLabel.setText(String.valueOf(service.getPlayer().getMagicBulletNum()));
             healthLabel.setText(String.valueOf(service.getPlayer().getHealth()));
             scoreLabel.setText(String.valueOf(GameParameter.toTalScore));
         }

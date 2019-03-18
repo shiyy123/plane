@@ -34,15 +34,17 @@ public class GameService {
         super();
         GameParameter.toTalScore = GameParameter.START_SCORE;// 开始计分
         // 玩家子弹列表
-        playerBullets = new ArrayList<Bullet>();
+        playerBullets = new ArrayList<>();
+        // 魔法子弹列表
+        playerMagicBullets = new ArrayList<>();
         // 敌人列表
-        enemies = new ArrayList<Enemy>();
+        enemies = new ArrayList<>();
         // 敌人子弹列表
-        enemiesBullets = new ArrayList<Bullet>();
+        enemiesBullets = new ArrayList<>();
         // 道具列表
-        magics = new ArrayList<Magic>();
+        magics = new ArrayList<>();
         // 爆炸特效列表
-        explosions = new ArrayList<Explosion>();
+        explosions = new ArrayList<>();
 
         // 背景音乐
         new Music("background.mp3", true).start();
@@ -54,9 +56,18 @@ public class GameService {
             player.draw(g);
         // 画玩家子弹
         if (!playerBullets.isEmpty()) {
-            for (int i = 0; i < playerBullets.size(); i++) {
-                if (playerBullets.get(i).isAlive())
-                    playerBullets.get(i).draw(g);
+            for (Bullet playerBullet : playerBullets) {
+                if (playerBullet.isAlive()) {
+                    playerBullet.draw(g);
+                }
+            }
+        }
+        // 画魔法子弹
+        if (!playerMagicBullets.isEmpty()) {
+            for (MagicBullet playerMagicBullet : playerMagicBullets) {
+                if (playerMagicBullet.isAlive()) {
+                    playerMagicBullet.draw(g);
+                }
             }
         }
         // 画敌人
@@ -101,8 +112,9 @@ public class GameService {
     }
 
     public void playerMove() {
-        if (player.isAlive())
+        if (player.isAlive()) {
             player.move();
+        }
     }
 
     public void generateEnemy() throws IOException {
@@ -154,12 +166,13 @@ public class GameService {
     }
 
     public void playerMagicBulletsGenerate() throws IOException {
-        if(GameParameter.isJ && player.getMagicBulletNum()!=0){
-            GameParameter.isJ=false;
+        if (GameParameter.isJ && player.getMagicBulletNum() != 0) {
+            GameParameter.isJ = false;
 
-            MagicBullet playerMagicBullet=player.magicAttack();
-            // TODO do
-
+            MagicBullet playerMagicBullet = player.magicAttack();
+            playerMagicBullets.add(playerMagicBullet);
+            // 子弹发射音效
+            new Music("fire.mp3", false).start();
         }
     }
 
@@ -168,6 +181,16 @@ public class GameService {
             for (int i = 0; i < playerBullets.size(); i++) {
                 if (playerBullets.get(i).isAlive())
                     playerBullets.get(i).move();
+            }
+        }
+    }
+
+    public void playerMagicBulletsMove() {
+        if (!playerMagicBullets.isEmpty()) {
+            for (MagicBullet playerMagicBullet : playerMagicBullets) {
+                if (playerMagicBullet.isAlive()) {
+                    playerMagicBullet.move();
+                }
             }
         }
     }
@@ -306,7 +329,7 @@ public class GameService {
         }
     }
 
-    public boolean gameEndDetecte() {
+    public boolean gameEndDetect() {
         if (player.isAlive() == false || player.getHealth() <= 0) {
             GameParameter.suspendFlag = false;
             return true;
@@ -314,7 +337,7 @@ public class GameService {
         return false;
     }
 
-    public boolean nextLevelDetecte() {
+    public boolean nextLevelDetect() {
         if (GameParameter.toTalScore >= GameParameter.TARGET_SCORE[GameParameter.currentLevel])
             return true;
         return false;
