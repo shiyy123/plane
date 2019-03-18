@@ -183,15 +183,15 @@ public class GameFrame extends JFrame {
         gamingPanel = new GamingPanel();
 
         // TestButton！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
-        JButton go = TestButton(40, 40, 0, 0);
-        go.setText("G");
-        go.addActionListener(e -> CardChange("go"));
-        gamingPanel.add(go);
-
-        JButton end = TestButton(40, 40, 100, 0);
-        end.setText("E");
-        end.addActionListener(e -> CardChange("end"));
-        gamingPanel.add(end);
+//        JButton go = TestButton(40, 40, 0, 0);
+//        go.setText("G");
+//        go.addActionListener(e -> CardChange("go"));
+//        gamingPanel.add(go);
+//
+//        JButton end = TestButton(40, 40, 100, 0);
+//        end.setText("E");
+//        end.addActionListener(e -> CardChange("end"));
+//        gamingPanel.add(end);
         // ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 
         gameFrame.add(gamingPanel, "gaming");
@@ -262,9 +262,16 @@ public class GameFrame extends JFrame {
             setBackground(Color.white);
             setSize(GameParameter.FRAME_WIDTH, GameParameter.FRAME_HIGHT);
 
+            // 誼蛍
             JLabel label1 = GameUtil.getIconSizeJLabel("img\\gaming1.png", 50, 50);
+
+            // 朕炎蛍方
             JLabel label2 = GameUtil.getIconSizeJLabel("img\\gaming2.png", 620, 50);
+
+            // 複噫徨起
             JLabel label3 = GameUtil.getIconSizeJLabel("img\\gaming3.png", 50, 860);
+
+            // 複噫僮楚
             JLabel label4 = GameUtil.getIconSizeJLabel("img\\gaming4.png", 620, 860);
 
             scoreLabel = GameUtil.getNumJLabel(180, 55);
@@ -278,7 +285,9 @@ public class GameFrame extends JFrame {
 
             // 兜兵晒炎禰方峙
             scoreLabel.setText(String.valueOf(GameParameter.START_SCORE));
+            // 朕炎蛍方昧彭購触延互延互
             targetLabel.setText(String.valueOf(GameParameter.TARGET_SCORE[GameParameter.currentLevel]));
+            // 兜兵複噫徨起方昧彭購触延互延互
             bulletLabel.setText(String.valueOf(GameParameter.START_BULLETS[GameParameter.currentLevel]));
             healthLabel.setText(String.valueOf(GameParameter.START_HEALTH));
 
