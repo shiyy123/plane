@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/game/GameFrame.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/game/GameParameter.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/game/GameService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/stuff/Boss.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/stuff/Bullet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/stuff/Detection.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/stuff/Enemy.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/stuff/EnemyThread.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/stuff/Explosion.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/stuff/GameComponent.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/stuff/Music.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/stuff/Player.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/stuff/PlayerThread.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/aircraftbattle/util/GameUtil.java" charset="GBK" />
+  </component>
+</project>
