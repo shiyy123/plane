@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import aircraftbattle.game.GameParameter.MagicType;
 import aircraftbattle.stuff.*;
@@ -16,15 +17,15 @@ import aircraftbattle.util.GameUtil;
 public class GameService {
 
     public static Player player;// 玩家
-    private ArrayList<Bullet> playerBullets;// 玩家子弹
+    private CopyOnWriteArrayList<Bullet> playerBullets;// 玩家子弹
 
-    private ArrayList<MagicBullet> playerMagicBullets;//魔法子弹
+    private CopyOnWriteArrayList<MagicBullet> playerMagicBullets;//魔法子弹
 
-    private ArrayList<Enemy> enemies;// 敌人列表
-    private ArrayList<Bullet> enemiesBullets;// 敌人子弹列表
+    private CopyOnWriteArrayList<Enemy> enemies;// 敌人列表
+    private CopyOnWriteArrayList<Bullet> enemiesBullets;// 敌人子弹列表
 
-    private ArrayList<Magic> magics;// 掉落物品列表
-    private ArrayList<Explosion> explosions;// 爆炸效果列表
+    private CopyOnWriteArrayList<Magic> magics;// 掉落物品列表
+    private CopyOnWriteArrayList<Explosion> explosions;// 爆炸效果列表
 
     public Player getPlayer() {
         return player;
@@ -34,17 +35,17 @@ public class GameService {
         super();
         GameParameter.toTalScore = GameParameter.START_SCORE;// 开始计分
         // 玩家子弹列表
-        playerBullets = new ArrayList<>();
+        playerBullets = new CopyOnWriteArrayList<>();
         // 魔法子弹列表
-        playerMagicBullets = new ArrayList<>();
+        playerMagicBullets = new CopyOnWriteArrayList<>();
         // 敌人列表
-        enemies = new ArrayList<>();
+        enemies = new CopyOnWriteArrayList<>();
         // 敌人子弹列表
-        enemiesBullets = new ArrayList<>();
+        enemiesBullets = new CopyOnWriteArrayList<>();
         // 道具列表
-        magics = new ArrayList<>();
+        magics = new CopyOnWriteArrayList<>();
         // 爆炸特效列表
-        explosions = new ArrayList<>();
+        explosions = new CopyOnWriteArrayList<>();
 
         // 背景音乐
         new Music("background.mp3", true).start();
@@ -79,9 +80,11 @@ public class GameService {
         }
         // 画敌人子弹
         if (!enemiesBullets.isEmpty()) {
-            for (Bullet enemiesBullet : enemiesBullets) {
-                if (enemiesBullet.isAlive()) {
-                    enemiesBullet.draw(g);
+            synchronized (this) {
+                for (Bullet enemiesBullet : enemiesBullets) {
+                    if (enemiesBullet.isAlive()) {
+                        enemiesBullet.draw(g);
+                    }
                 }
             }
         }
@@ -183,6 +186,36 @@ public class GameService {
         }
     }
 
+    public void playerSkill1Generate() {
+        if (GameParameter.isK) {
+            GameParameter.isK = false;
+            GameParameter.skill1Flag = true;
+            new Thread(() -> {
+                try {
+                    Thread.sleep(GameParameter.SKILL_AMOUNT[GameParameter.currentSkillLevel] * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                GameParameter.skill1Flag = false;
+            }).start();
+        }
+    }
+
+    public void playerSkill2Generate() {
+        if (GameParameter.isL) {
+            GameParameter.isL = false;
+            GameParameter.skill2Flag = true;
+            new Thread(() -> {
+                try {
+                    Thread.sleep(GameParameter.SKILL_AMOUNT[GameParameter.currentSkillLevel] * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                GameParameter.skill2Flag = false;
+            }).start();
+        }
+    }
+
     public void playerBulletsMove() {
         if (!playerBullets.isEmpty()) {
             for (Bullet playerBullet : playerBullets) {
@@ -220,9 +253,11 @@ public class GameService {
             }
             // 可以发射子弹
             if (flag) {
-                Bullet enemyBullet = enemy.directionalAttack(player.getX(), player.getY());
-                enemy.setCurrentBullet(enemyBullet);
-                enemiesBullets.add(enemyBullet);
+                if ((int) (1 + Math.random() * (10 - 1 + 1)) == 1) {
+                    Bullet enemyBullet = enemy.directionalAttack(player.getX(), player.getY());
+                    enemy.setCurrentBullet(enemyBullet);
+                    enemiesBullets.add(enemyBullet);
+                }
             }
         }
 

@@ -29,7 +29,7 @@ public class Player extends GameComponent {
     }
 
     public int getHealth() {
-        return health;
+        return GameParameter.playerHealth[GameParameter.currentLevel];
     }
 
     public void setHealth(int health) {
@@ -88,8 +88,10 @@ public class Player extends GameComponent {
     }
 
     public Bullet attack() throws IOException {
-        if (bulletsNum != 0) {
-            bulletsNum--;// 子弹数量减少
+        if (bulletsNum != 0 || GameParameter.skill2Flag) {
+            if (!GameParameter.skill2Flag) {
+                bulletsNum--;// 子弹数量减少
+            }
         }
 
         String path = GameUtil.getTypedBulletPath(BulletType.PLAYER);
@@ -115,7 +117,9 @@ public class Player extends GameComponent {
     }
 
     public void hurt(int hurtPoint) {
-        health -= hurtPoint;
+        if (!GameParameter.skill1Flag) {
+            GameParameter.playerHealth[GameParameter.currentLevel] -= hurtPoint;
+        }
 
         if (hurtPoint < 0 && !GameParameter.isWisdom) health += GameParameter.MAGIC_HEALTH_POINT;//力量型战机两倍生命
 

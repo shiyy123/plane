@@ -26,6 +26,8 @@ public class PlayerThread extends Thread {
 				gameFrame.getService().playerMove();
 				gameFrame.getService().playerBulletsMove();
 				gameFrame.getService().playerMagicBulletsMove();
+				gameFrame.getService().playerSkill1Generate();
+				gameFrame.getService().playerSkill2Generate();
 							
 				// ÖØ»æ
 				gameFrame.repaint();

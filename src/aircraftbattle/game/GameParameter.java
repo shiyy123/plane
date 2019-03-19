@@ -7,7 +7,7 @@ package aircraftbattle.game;
 public class GameParameter {
 
     // 游戏进行时参数————————————————————————————————————————————————————————————————————————————
-    public static boolean isW, isA, isS, isD, isSpace, isJ;// 各键是否按下
+    public static boolean isW, isA, isS, isD, isSpace, isJ, isK, isL;// 各键是否按下
     public static boolean isWisdom;// 是否是智慧型战机
     public static int toTalScore;// 本次游戏总分
     public static int currentLevel;// 当前关卡
@@ -32,6 +32,7 @@ public class GameParameter {
     public static final int START_HEALTH = 100;// 起始生命值
     public static final int[] START_BULLETS = {100, 200, 300, 400, 500};// 起始子弹
     public static final int[] START_MAGIC_BULLETS = {10, 20, 30, 40, 50};//起始魔法子弹
+    public static final int[] playerHealth = {100, 120, 140, 160, 200};
     // 敌人参数
     public static final int[] ENEMY_BULLETS = {2, 5, 10, 15, 10000};// 敌人子弹
     public static final int ENEMY_HEALTH = 10;// 敌人生命值
@@ -49,7 +50,7 @@ public class GameParameter {
     public static final int MAGIC_BULLET_SPEED_Y = 3;// 魔法子弹纵向速度
 
     // 技能持续时间参数
-    public static final int[] SKILL_AMOUNT = {2, 4, 6, 8, 10};
+    public static final int[] SKILL_AMOUNT = {1, 2, 3, 4, 5};
 
     public enum BulletType {
         PLAYER, ENEMY, MAGIC

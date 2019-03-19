@@ -81,6 +81,12 @@ public class GameFrame extends JFrame {
                     case KeyEvent.VK_J:
                         GameParameter.isJ = true;
                         break;
+                    case KeyEvent.VK_K:
+                        GameParameter.isK = true;
+                        break;
+                    case KeyEvent.VK_L:
+                        GameParameter.isL = true;
+                        break;
                 }
             }
 
@@ -104,6 +110,12 @@ public class GameFrame extends JFrame {
                         break;
                     case KeyEvent.VK_J:
                         GameParameter.isJ = false;
+                        break;
+                    case KeyEvent.VK_K:
+                        GameParameter.isK = false;
+                        break;
+                    case KeyEvent.VK_L:
+                        GameParameter.isL = false;
                         break;
                 }
             }
@@ -214,8 +226,9 @@ public class GameFrame extends JFrame {
         JLabel label1 = GameUtil.getIconSizeJLabel("img\\Go1.png", 100, 100);
         JButton button1 = GameUtil.getIconSizeJButton("img\\Go2.png", 400, 720);
         button1.addActionListener(e -> {
-            if (GameParameter.currentLevel == 4)
+            if (GameParameter.currentLevel == 4) {
                 System.exit(0);
+            }
             service.clear();// 清屏
             GamingPanelBuild(gameFrame, ++GameParameter.currentLevel, ++GameParameter.currentSkillLevel);// 进入下一关
             CardChange("gaming");
@@ -304,7 +317,7 @@ public class GameFrame extends JFrame {
             targetLabel.setText(String.valueOf(GameParameter.TARGET_SCORE[GameParameter.currentLevel]));
             // 初始剩余子弹数随着关卡变高变高
             bulletLabel.setText(String.valueOf(GameParameter.START_BULLETS[GameParameter.currentLevel]));
-            healthLabel.setText(String.valueOf(GameParameter.START_HEALTH));
+            healthLabel.setText(String.valueOf(GameParameter.playerHealth[GameParameter.currentLevel]));
             magicBulletLabel.setText(String.valueOf(GameParameter.START_MAGIC_BULLETS[GameParameter.currentLevel]));
 
 //            Container container = getContentPane();
