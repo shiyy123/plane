@@ -129,10 +129,10 @@ public class GameFrame extends JFrame {
         startPanel = GameUtil.getBackgroundJPanel();
 
         // 设置Panel内容
-        JLabel title = GameUtil.getIconSizeJLabel("img\\start1.png", 100, 100);
-        JButton button1 = GameUtil.getIconSizeJButton("img\\start2.png", 100, 650);
+        JLabel title = GameUtil.getIconSizeJLabel("img\\start1.png", 100, 30);
+        JButton button1 = GameUtil.getIconSizeJButton("img\\start2.png", 100, 550);
         button1.addActionListener(e -> CardChange("choose"));
-        JButton button2 = GameUtil.getIconSizeJButton("img\\start3.png", 450, 650);
+        JButton button2 = GameUtil.getIconSizeJButton("img\\start3.png", 450, 550);
         button2.addActionListener(e -> CardChange("help"));
 
         // 把内容加入Panel
@@ -147,9 +147,9 @@ public class GameFrame extends JFrame {
     private void HelpPanelBuild(GameFrame gameFrame) {
         helpPanel = GameUtil.getBackgroundJPanel();
 
-        JLabel label1 = GameUtil.getIconSizeJLabel("img\\help1.png", 300, 50);
-        JLabel label2 = GameUtil.getIconSizeJLabel("img\\help2.png", 100, 180);
-        JButton button1 = GameUtil.getIconSizeJButton("img\\help3.png", 100, 850);
+        JLabel label1 = GameUtil.getIconSizeJLabel("img\\help1.png", 300, 20);
+        JLabel label2 = GameUtil.getIconSizeJLabel("img\\help2_1.png", 100, 70);
+        JButton button1 = GameUtil.getIconSizeJButton("img\\help3.png", 160, 600);
         button1.addActionListener(e -> CardChange("start"));
 
         helpPanel.add(label1);
@@ -161,8 +161,11 @@ public class GameFrame extends JFrame {
     private void ChoosePanelBuild(GameFrame gameFrame) {
         choosePanel = GameUtil.getBackgroundJPanel();
 
-        JLabel label1 = GameUtil.getIconSizeJLabel("img\\choose1.png", 80, 80);
-        JButton startButton = GameUtil.getIconSizeJButton("img\\choose2.png", 470, 800);
+        JLabel label1 = GameUtil.getIconSizeJLabel("img\\choose1.png", 250, 20);
+        JButton startButton = GameUtil.getIconSizeJButton("img\\choose2.png", 470, 580);
+        JButton button2 = GameUtil.getIconSizeJButton("img\\choose3.png", 80, 580);
+        button2.addActionListener(e -> CardChange("start"));
+
         startButton.addActionListener(e -> {
             // 切换到下一个界面前更改玩家飞机类型
             try {
@@ -181,15 +184,15 @@ public class GameFrame extends JFrame {
             CardChange("gaming");
         });
         // 选择战机
-        JLabel chooseFrame = GameUtil.getIconSizeJLabel("img\\Frame.png", 50, 323);// 初始化选择框
-        JButton one = GameUtil.getIconSizeJButton("img\\ChoosePlayer1.png", 80, 350);
+        JLabel chooseFrame = GameUtil.getIconSizeJLabel("img\\Frame.png", 50, 173);// 初始化选择框
+        JButton one = GameUtil.getIconSizeJButton("img\\ChoosePlayer1.png", 80, 200);
         one.addActionListener(e -> {
-            chooseFrame.setLocation(50, 323);
+            chooseFrame.setLocation(50, 173);
             GameParameter.isWisdom = false;// 选择力量型战机
         });
-        JButton two = GameUtil.getIconSizeJButton("img\\ChoosePlayer2.png", 421, 350);
+        JButton two = GameUtil.getIconSizeJButton("img\\ChoosePlayer2.png", 421, 200);
         two.addActionListener(e -> {
-            chooseFrame.setLocation(390, 323);
+            chooseFrame.setLocation(390, 173);
             GameParameter.isWisdom = true;// 选择智慧型战机
         });
 
@@ -198,6 +201,7 @@ public class GameFrame extends JFrame {
         choosePanel.add(one);
         choosePanel.add(two);
         choosePanel.add(chooseFrame);
+        choosePanel.add(button2);
         gameFrame.add(choosePanel, "choose");
 
     }
@@ -223,8 +227,8 @@ public class GameFrame extends JFrame {
     private void GoPanelBuild(GameFrame gameFrame) {
         goPanel = GameUtil.getBackgroundJPanel();
 
-        JLabel label1 = GameUtil.getIconSizeJLabel("img\\Go1.png", 100, 100);
-        JButton button1 = GameUtil.getIconSizeJButton("img\\Go2.png", 400, 720);
+        JLabel label1 = GameUtil.getIconSizeJLabel("img\\Go1.png", 100, 20);
+        JButton button1 = GameUtil.getIconSizeJButton("img\\Go2.png", 400, 520);
         button1.addActionListener(e -> {
             if (GameParameter.currentLevel == 4) {
                 System.exit(0);
@@ -242,9 +246,9 @@ public class GameFrame extends JFrame {
     private void EndPanelBuild(GameFrame gameFrame) {
         endPanel = GameUtil.getBackgroundJPanel();
 
-        JLabel label1 = GameUtil.getIconSizeJLabel("img\\End1.png", 100, 100);
-        JButton button1 = GameUtil.getIconSizeJButton("img\\End2.png", 100, 720);
-        JButton button2 = GameUtil.getIconSizeJButton("img\\End3.png", 450, 720);
+        JLabel label1 = GameUtil.getIconSizeJLabel("img\\End1.png", 100, 20);
+        JButton button1 = GameUtil.getIconSizeJButton("img\\End2.png", 100, 520);
+        JButton button2 = GameUtil.getIconSizeJButton("img\\End3.png", 450, 520);
 
         // 结束游戏
         button1.addActionListener(e -> System.exit(0));
@@ -253,6 +257,7 @@ public class GameFrame extends JFrame {
             GameParameter.suspendFlag = false;// 线程循环不可行
             GameParameter.toTalScore = GameParameter.START_SCORE;// 重新计分
             GameParameter.currentLevel = GameParameter.START_LEVEL;// 新关卡
+
             GamingPanelBuild(gameFrame, GameParameter.START_LEVEL, GameParameter.START_SKILL_LEVEL);// 创建初始关卡
             service.clear();// 清屏
 
@@ -287,25 +292,25 @@ public class GameFrame extends JFrame {
             setSize(GameParameter.FRAME_WIDTH, GameParameter.FRAME_HEIGHT);
 
             // 得分
-            JLabel label1 = GameUtil.getIconSizeJLabel("img\\gaming1.png", 50, 50);
+            JLabel label1 = GameUtil.getIconSizeJLabel("img\\gaming1.png", 50, 20);
 
             // 目标分数
-            JLabel label2 = GameUtil.getIconSizeJLabel("img\\gaming2.png", 620, 50);
+            JLabel label2 = GameUtil.getIconSizeJLabel("img\\gaming2.png", 620, 20);
 
             // 剩余子弹
-            JLabel label3 = GameUtil.getIconSizeJLabel("img\\gaming3.png", 50, 860);
+            JLabel label3 = GameUtil.getIconSizeJLabel("img\\gaming3.png", 50, 560);
 
             // 剩余魔法子弹
-            JLabel label5 = GameUtil.getIconSizeJLabel("img\\gaming5.png", 50, 760);
+            JLabel label5 = GameUtil.getIconSizeJLabel("img\\gaming5.png", 50, 460);
 
             // 剩余血量
-            JLabel label4 = GameUtil.getIconSizeJLabel("img\\gaming4.png", 620, 860);
+            JLabel label4 = GameUtil.getIconSizeJLabel("img\\gaming4.png", 620, 560);
 
-            scoreLabel = GameUtil.getNumJLabel(180, 55);
-            targetLabel = GameUtil.getNumJLabel(500, 55);
-            bulletLabel = GameUtil.getNumJLabel(180, 860);
-            healthLabel = GameUtil.getNumJLabel(520, 860);
-            magicBulletLabel = GameUtil.getNumJLabel(180, 760);
+            scoreLabel = GameUtil.getNumJLabel(180, 25);
+            targetLabel = GameUtil.getNumJLabel(500, 25);
+            bulletLabel = GameUtil.getNumJLabel(180, 560);
+            healthLabel = GameUtil.getNumJLabel(520, 560);
+            magicBulletLabel = GameUtil.getNumJLabel(180, 460);
 
             targetLabel.setForeground(Color.blue);
             scoreLabel.setForeground(Color.green);
