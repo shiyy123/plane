@@ -13,6 +13,8 @@ public class GameParameter {
     public static int currentLevel;// 当前关卡
     public static boolean suspendFlag;//游戏线程暂停标志
     public static int currentSkillLevel;//当前技能等级
+//    public static int currenthealth;//当前健康值
+//    public static int[] currentbullets;//起始子弹数
     public static boolean skill1Flag = false;
     public static boolean skill2Flag = false;
 
@@ -25,7 +27,7 @@ public class GameParameter {
     public static final int PLAYER_SPEED_X = 4;// 玩家横向速度
     public static final int PLAYER_SPEED_Y = 5;// 玩家纵向速度
     public static final int PLAYER_SPAWN_X = 360;// 玩家发生点横坐标
-    public static final int PLAYER_SPAWN_Y = 820;// 玩家发生点纵坐标
+    public static final int PLAYER_SPAWN_Y = 620;// 玩家发生点纵坐标
     public static final int START_SCORE = 0;// 起始分数
     public static final int START_LEVEL = 0;// 起始关卡
     public static final int START_SKILL_LEVEL = 0;//起始技能等级
@@ -78,7 +80,7 @@ public class GameParameter {
 
     // 界面参数————————————————————————————————————————————————————————————————————————————————
     public static final int FRAME_WIDTH = 800;// 界面宽度
-    public static final int FRAME_HEIGHT = 1000;// 界面高度
+    public static final int FRAME_HEIGHT = 800;// 界面高度
 
     public static final int AIRCRAFT_IMAGE_LENGTH = 80;// 飞机图片边长 80
     public static final int BULLET_IMAGE_WIDTH = 25;// 子弹图片宽
