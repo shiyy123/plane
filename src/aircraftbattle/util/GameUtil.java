@@ -71,7 +71,7 @@ public class GameUtil {
         } else if (type == BulletType.ENEMY) {
             path.append("2.png");
         } else if (type == BulletType.MAGIC) {
-            path.append("2.png");
+            path.append("3.png");
         }
 
         return path.toString();
