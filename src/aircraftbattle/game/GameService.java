@@ -408,6 +408,7 @@ public class GameService {
     }
 
     public boolean gameEndDetect() {
+        System.out.println(player.getHealth());
         if (!player.isAlive() || player.getHealth() <= 0) {
             GameParameter.suspendFlag = false;
             return true;

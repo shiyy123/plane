@@ -29,7 +29,8 @@ public class Player extends GameComponent {
     }
 
     public int getHealth() {
-        return GameParameter.playerHealth[GameParameter.currentLevel];
+        return health;
+//        return GameParameter.playerHealth[GameParameter.currentLevel];
     }
 
     public void setHealth(int health) {
@@ -58,7 +59,7 @@ public class Player extends GameComponent {
         this.setAlive(true);
         this.bulletsNum = GameParameter.START_BULLETS[level];
         this.magicBulletNum = GameParameter.START_MAGIC_BULLETS[level];
-        this.health = GameParameter.START_HEALTH;
+        this.health = GameParameter.playerHealth[level];
         this.score = GameParameter.toTalScore;
     }
 
@@ -118,10 +119,13 @@ public class Player extends GameComponent {
 
     public void hurt(int hurtPoint) {
         if (!GameParameter.skill1Flag) {
-            GameParameter.playerHealth[GameParameter.currentLevel] -= hurtPoint;
+            this.health -= hurtPoint;
+//            GameParameter.playerHealth[GameParameter.currentLevel] -= hurtPoint;
         }
 
-        if (hurtPoint < 0 && !GameParameter.isWisdom) health += GameParameter.MAGIC_HEALTH_POINT;//力量型战机两倍生命
+        if (hurtPoint < 0 && !GameParameter.isWisdom) {
+            health += GameParameter.MAGIC_HEALTH_POINT;//力量型战机两倍生命
+        }
 
         new Music("hurt.mp3", false).start();//音效
     }

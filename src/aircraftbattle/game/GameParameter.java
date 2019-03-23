@@ -32,7 +32,10 @@ public class GameParameter {
     public static final int START_HEALTH = 100;// 起始生命值
     public static final int[] START_BULLETS = {100, 200, 300, 400, 500};// 起始子弹
     public static final int[] START_MAGIC_BULLETS = {10, 20, 30, 40, 50};//起始魔法子弹
+
     public static final int[] playerHealth = {100, 120, 140, 160, 200};
+//    public static final int[] playerHealth = {10, 12, 14, 16, 20};
+
     // 敌人参数
     public static final int[] ENEMY_BULLETS = {2, 5, 10, 15, 10000};// 敌人子弹
     public static final int ENEMY_HEALTH = 10;// 敌人生命值

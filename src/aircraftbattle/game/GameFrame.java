@@ -205,6 +205,8 @@ public class GameFrame extends JFrame {
     private void GamingPanelBuild(GameFrame gameFrame, int level, int skillLevel) {
         gamingPanel = new GamingPanel();
 
+        //System.out.println("Here");
+
         // TestButton————————————————————————————————————————————————————————————
 //        JButton go = TestButton(40, 40, 0, 0);
 //        go.setText("G");
@@ -253,6 +255,9 @@ public class GameFrame extends JFrame {
             GameParameter.suspendFlag = false;// 线程循环不可行
             GameParameter.toTalScore = GameParameter.START_SCORE;// 重新计分
             GameParameter.currentLevel = GameParameter.START_LEVEL;// 新关卡
+            GameParameter.skill1Flag = false;
+            GameParameter.skill2Flag = false;
+
             GamingPanelBuild(gameFrame, GameParameter.START_LEVEL, GameParameter.START_SKILL_LEVEL);// 创建初始关卡
             service.clear();// 清屏
 
@@ -271,6 +276,8 @@ public class GameFrame extends JFrame {
 
         public GamingPanel() {
             super();
+
+//            System.out.println("here");
             initialize();
 
             // 创建玩家战机
